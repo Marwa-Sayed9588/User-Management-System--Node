@@ -1,0 +1,105 @@
+<!-- home.ejs -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User Management System</title>
+    </head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+    <body>
+        <h2>User Management System</h2>
+        <table>
+            <tr>
+                <th>User Id</th>
+                <th>User Name</th>
+                <th>User Email</th>
+                <th>Age</th>
+                <th>Delete</th>
+            </tr>
+            <% data.forEach(element => { %>
+            <tr>
+                <td>
+                    <%= element.userUniqueId %>
+                </td>
+                <td><%= element.userName %></td>
+                <td><%= element.userEmail %></td>
+                <td><%= element.userAge %></td>
+                <td>
+                    <form
+                        action="/delete"
+                        method="post"
+                    >
+                        <input
+                            type="text"
+                            style="display: none"
+                            name="userUniqueId"
+                            value="<%= element.userUniqueId %>"
+                        />
+                        <button type="submit">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <h2>Add User</h2>
+
+        <form action="/" method="post">
+            <input
+                type="text"
+                placeholder="User
+         Unique Id"
+                name="userUniqueId"
+            />
+            <input
+                type="text"
+                placeholder="User Name"
+                name="userName"
+            />
+            <input
+                type="text"
+                placeholder="User Email"
+                name="userEmail"
+            />
+            <input
+                type="text"
+                placeholder="User Age"
+                name="userAge"
+            />
+            <button type="submit">Submit</button>
+        </form>
+
+        <h2>Update User</h2>
+
+        <form action="update" method="post">
+            <input type="text" placeholder="User Unique Id"
+                name="userUniqueId">
+            <input type="text" placeholder="User Name" 
+                name="userName">
+            <input type="text" placeholder="User Email" 
+                name="userEmail">
+            <input type="text" placeholder="User Age" 
+                name="userAge">
+            <button type="submit">Update</button>
+        </form>
+    </body>
+</html>
